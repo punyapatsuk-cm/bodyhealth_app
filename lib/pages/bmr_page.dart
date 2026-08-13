@@ -1,3 +1,4 @@
+import 'package:bmr_app/controllers/bmr_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -18,11 +19,7 @@ class _BmrPageState extends State<BmrPage> {
     weight: 0.0,
     height: 0.0,
   );
-
-
-
-
-
+  final BmrController _bmrController = BmrController();
 
   void _showAlertBox(
     BuildContext context, {
@@ -58,6 +55,24 @@ class _BmrPageState extends State<BmrPage> {
         );
       },
     );
+  }
+
+  void doCalculation() {
+    try {
+      double bmr = _bmrController.processBmrCalculation(bodyProfile);
+      _showAlertBox(
+        context,
+        title: "BMR Result",
+        message: 'Your BMR is: ${bmr.toStringAsFixed(2)}',
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Error calculating BMR: ${e.toString()}'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
   @override
