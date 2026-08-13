@@ -7,7 +7,6 @@ class BmrController {
     : _bmrService = bmrService ?? BmrService();
   double processBmrCalculation(BodyProfile profile) {
     try {
-      // 1. สงสารไปให ้ ่ Service คําานวณ
       double bmrResult = _bmrService.calculateBMR(
         profile.weight,
         profile.height,
@@ -16,7 +15,7 @@ class BmrController {
       );
       return bmrResult;
     } catch (e) {
-      rethrow; // สง่ Error กลับไปให ้ UI ที่เป็ นคนเรียกใชเพื่อแสดงข ้อความผิดพลาด ้
+      rethrow; 
     }
   }
 }
