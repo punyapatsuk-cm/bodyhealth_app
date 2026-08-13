@@ -93,9 +93,12 @@ class _BmrPageState extends State<BmrPage> {
               children: [
                 FormBuilderRadioGroup<String>(
                   name: 'gender',
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Gender:',
-                    icon: Icon(Icons.wc_outlined, color: Colors.deepPurple),
+                    icon: bodyProfile.gender == 'Male'
+                        ? const Icon(Icons.male, color: Colors.deepPurple)
+                        : const Icon(Icons.female, color: Colors.deepPurple),
+                    //icon: Icon(Icons.wc_outlined, color: Colors.deepPurple),
                   ),
                   orientation: OptionsOrientation.vertical,
                   options: ['Male', 'Female']
@@ -107,7 +110,9 @@ class _BmrPageState extends State<BmrPage> {
                       )
                       .toList(),
                   onChanged: (value) {
-                    bodyProfile.gender = value ?? '';
+                    setState(() {
+                      bodyProfile.gender = value ?? '';
+                    }); 
                   },
                   autovalidateMode: AutovalidateMode.always,
                   validator: FormBuilderValidators.required(
