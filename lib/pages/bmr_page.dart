@@ -19,6 +19,47 @@ class _BmrPageState extends State<BmrPage> {
     height: 0.0,
   );
 
+
+
+
+
+
+  void _showAlertBox(
+    BuildContext context, {
+    String title = "info",
+    required String message,
+  }) {
+    showDialog(
+      context: context,
+      barrierDismissible: false, // ผู้ใชต้องกดปุ่ มเพื่อปิด ้ AlertDialog
+
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+          title: Row(
+            children: [
+              const Icon(Icons.info, color: Colors.blue),
+              const SizedBox(width: 8),
+
+              Text(title),
+            ],
+          ),
+          content: Text(message, style: const TextStyle(fontSize: 16)),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('ปิด'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -145,7 +186,7 @@ class _BmrPageState extends State<BmrPage> {
                       Expanded(
                         child: OutlinedButton(
                           onPressed: () {
-                            // Handle form reset                           
+                            // Handle form reset
                           },
                           // style: ElevatedButton.styleFrom(
                           //   backgroundColor: Colors.grey,
