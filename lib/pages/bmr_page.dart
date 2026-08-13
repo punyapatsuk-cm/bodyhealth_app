@@ -193,6 +193,17 @@ class _BmrPageState extends State<BmrPage> {
                         child: OutlinedButton(
                           onPressed: () {
                             // Handle form submission
+                            if (_formKey.currentState!.validate()) {
+                                doCalculation();
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                      'Please correct the errors in the form.'),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            }
                           },
                           child: Text('Calculate'),
                         ),
@@ -202,6 +213,7 @@ class _BmrPageState extends State<BmrPage> {
                         child: OutlinedButton(
                           onPressed: () {
                             // Handle form reset
+                            _formKey.currentState!.reset();
                           },
                           // style: ElevatedButton.styleFrom(
                           //   backgroundColor: Colors.grey,
